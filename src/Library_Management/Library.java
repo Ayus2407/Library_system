@@ -21,16 +21,19 @@ public class Library {
     }
 
     // Method to display available books in the library
-    public void displayBooks() {
+    public List<String> displayBooks() {
+        List<String> bookInfoList = new ArrayList<>();
         if (books.isEmpty()) {
-            System.out.println("The library is empty.");
+            bookInfoList.add("The library is empty.");
         } else {
-            System.out.println("Library Catalog:");
-            // Iterate through the list of books and display each book's details
+        	 System.out.println("Library Catalog:");
             for (Book book : books) {
-                System.out.printf("Title: %s, Author: %s, Available: %d\n", book.title, book.author, book.quantity - book.borrowers.size());
+                String bookInfo = String.format("Title: %s, Author: %s, Available: %d",
+                                                book.title, book.author, book.quantity - book.borrowers.size());
+                bookInfoList.add(bookInfo);
             }
         }
+        return bookInfoList;
     }
 
     // Method to borrow a book from the library
@@ -73,22 +76,28 @@ public class Library {
     }
 
     // Method to search for a book by title or author
-    public void searchBook(String query) {
+    public List<String> searchBooks(String query) {
+        List<String> matchingBooksInfoList = new ArrayList<>();
         boolean found = false;
         // Iterate through the list of books to find matching books
         for (Book book : books) {
             if (book.title.toLowerCase().contains(query.toLowerCase()) || book.author.toLowerCase().contains(query.toLowerCase())) {
-                System.out.printf("Title: %s, Author: %s, Available: %d\n", book.title, book.author, book.quantity - book.borrowers.size());
+                String bookInfo = String.format("Title: %s, Author: %s, Available: %d",
+                                                book.title, book.author, book.quantity - book.borrowers.size());
+                matchingBooksInfoList.add(bookInfo);
                 found = true;
             }
         }
         if (!found) {
-            System.out.println("Book not found in the library.");
+            matchingBooksInfoList.add("Book not found in the library.");
         }
+        return matchingBooksInfoList;
     }
 
+
     // Method to display borrowed books and their borrowers
-    public void displayBorrowedBooks() {
+    public List<String> displayBorrowedBooksInfo() {
+        List<String> borrowedBooksInfoList = new ArrayList<>();
         boolean borrowed = false;
         System.out.println("Borrowed Books:");
         // Iterate through the list of books to find borrowed books
@@ -96,13 +105,15 @@ public class Library {
             for (Map.Entry<String, Integer> entry : book.borrowers.entrySet()) {
                 if (entry.getValue() > 0) {
                     borrowed = true;
-                    System.out.printf("Title: %s, Author: %s, Borrower: %s, Copies Borrowed: %d\n",
-                            book.title, book.author, entry.getKey(), entry.getValue());
+                    String bookInfo = String.format("Title: %s, Author: %s, Borrower: %s, Copies Borrowed: %d",
+                                                    book.title, book.author, entry.getKey(), entry.getValue());
+                    borrowedBooksInfoList.add(bookInfo);
                 }
             }
         }
         if (!borrowed) {
-            System.out.println("No books are currently borrowed.");
+            borrowedBooksInfoList.add("No books are currently borrowed.");
         }
+        return borrowedBooksInfoList;
     }
 }
