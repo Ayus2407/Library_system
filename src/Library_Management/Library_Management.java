@@ -2,74 +2,86 @@ package Library_Management;
 import java.util.Scanner;
 
 public class Library_Management {
-	 public static void main(String[] args) {
-	        Library library = new Library();
-	        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        // Create a Library object
+        Library library = new Library();
+        // Create a Scanner object to take user input
+        Scanner scanner = new Scanner(System.in);
 
-	        while (true) {
-	            System.out.println("\nLibrary Management System");
-	            System.out.println("1. Add Book");
-	            System.out.println("2. Display Available Books");
-	            System.out.println("3. Borrow Book");
-	            System.out.println("4. Return Book");
-	            System.out.println("5. Search for a Book");
-	            System.out.println("6. Display Borrowed Books");
-	            System.out.println("7. Quit");
+        // Display menu options in a loop until the user chooses to quit
+        while (true) {
+            System.out.println("\nLibrary Management System");
+            System.out.println("1. Add Book");
+            System.out.println("2. Display Available Books");
+            System.out.println("3. Borrow Book");
+            System.out.println("4. Return Book");
+            System.out.println("5. Search for a Book");
+            System.out.println("6. Display Borrowed Books");
+            System.out.println("7. Quit");
 
-	            System.out.print("Enter your choice: ");
-	            String choice = scanner.nextLine();
+            // Prompt user for input
+            System.out.print("Enter your choice: ");
+            String choice = scanner.nextLine();
 
-	            switch (choice) {
-	                case "1":
-	                    System.out.print("Enter book title: ");
-	                    String title = scanner.nextLine();
-	                    System.out.print("Enter author name: ");
-	                    String author = scanner.nextLine();
-	                    System.out.print("Enter quantity available: ");
-	                    int quantity = scanner.nextInt();
-	                    scanner.nextLine(); // Consume newline character
-	                    library.addBook(title, author, quantity);
-	                    break;
+            // Perform actions based on user choice
+            switch (choice) {
+                case "1":
+                    // Add a new book to the library
+                    System.out.print("Enter book title: ");
+                    String title = scanner.nextLine();
+                    System.out.print("Enter author name: ");
+                    String author = scanner.nextLine();
+                    System.out.print("Enter quantity available: ");
+                    int quantity = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline character
+                    library.addBook(title, author, quantity);
+                    break;
 
-	                case "2":
-	                    library.displayBooks();
-	                    break;
+                case "2":
+                    // Display available books in the library
+                    library.displayBooks();
+                    break;
 
-	                case "3":
-	                    System.out.print("Enter the title of the book you want to borrow: ");
-	                    String borrowTitle = scanner.nextLine();
-	                    System.out.print("Enter your username: ");
-	                    String borrowUsername = scanner.nextLine();
-	                    library.borrowBook(borrowTitle, borrowUsername);
-	                    break;
+                case "3":
+                    // Borrow a book from the library
+                    System.out.print("Enter the title of the book you want to borrow: ");
+                    String borrowTitle = scanner.nextLine();
+                    System.out.print("Enter your username: ");
+                    String borrowUsername = scanner.nextLine();
+                    library.borrowBook(borrowTitle, borrowUsername);
+                    break;
 
-	                case "4":
-	                    System.out.print("Enter the title of the book you want to return: ");
-	                    String returnTitle = scanner.nextLine();
-	                    System.out.print("Enter your username: ");
-	                    String returnUsername = scanner.nextLine();
-	                    library.returnBook(returnTitle, returnUsername);
-	                    break;
+                case "4":
+                    // Return a borrowed book to the library
+                    System.out.print("Enter the title of the book you want to return: ");
+                    String returnTitle = scanner.nextLine();
+                    System.out.print("Enter your username: ");
+                    String returnUsername = scanner.nextLine();
+                    library.returnBook(returnTitle, returnUsername);
+                    break;
 
-	                case "5":
-	                    System.out.print("Enter book title or author name to search: ");
-	                    String searchQuery = scanner.nextLine();
-	                    library.searchBook(searchQuery);
-	                    break;
+                case "5":
+                    // Search for a book by title or author
+                    System.out.print("Enter book title or author name to search: ");
+                    String searchQuery = scanner.nextLine();
+                    library.searchBook(searchQuery);
+                    break;
 
-	                case "6":
-	                    library.displayBorrowedBooks();
-	                    break;
+                case "6":
+                    // Display borrowed books
+                    library.displayBorrowedBooks();
+                    break;
 
-	                case "7":
-	                    System.out.println("Exiting the library system.");
-	                    scanner.close();
-	                    return;
+                case "7":
+                    // Exit the library system
+                    System.out.println("Exiting the library system.");
+                    scanner.close();
+                    return;
 
-	                default:
-	                    System.out.println("Invalid choice. Please enter a valid option.");
-	            }
-	        }
-	    }
-
+                default:
+                    // Handle invalid input
+                    System.out.println("Invalid choice. Please enter a valid option.");
+            }
+        }
+    }
 }
